@@ -1,0 +1,101 @@
+(poi ricordati di fottere tutto il fottibile da francesco, mi raccomando)
+* Modelli
+** Authentication
+*** ShopUser
+- extends =django.contrib.auth.models.AbstractUser=
+- la mail è obbligatoria
+- username, obbligatorio
+
+** Shop
+*** Product
+- seller (utente)
+- nome
+- prezzo
+- boh
+  
+*** Order
+- buyer (utente)
+- prodotto (prodotto)
+- numero oridnato
+
+* Viste
+** Authentication
+*** ShopUserViewset
+- user list view
+  - metodi ::
+    - get :: prendi tutta lista (sconsigliato?) (list della viewset)
+    - post :: crea nuovo utente
+- user detail view
+  - metodi ::
+    - get :: vedi utente (retrieve della viewset)
+    - put :: aggiorna dati utente (update della viewset)
+    - patch :: partial update ?
+    - delete :: rimuovi utente (destroy della viewset)
+
+** Shop
+*** ProductViewset
+il queryset su cui agire verrà ricavato anche con un utente come dato
+(o almeno la pk di un utente)
+poi si fa utente.product_set() e quello è il queryset
+
+pseudocodice:
+#+begin_src python
+  def get_queryset(self, user_id):
+      user = ShopUser.objects.get(id=user_id)
+      return user.product_set()
+
+  @some_decorator()
+  def some_action(request):
+      queryset = self.get_queryset(request.user.id)
+      # qui fai le cose
+#+end_src
+
+ - product list view
+   - get :: list
+   - post :: create/add
+ - product detail view
+   - get :: retrieve
+   - put :: update <- boh
+   - patch :: partial_update
+   - delete :: destroy
+
+**** ProductListView
+owner or readonly
+ - =url-utente/products/=
+   - metodi ::
+     - =GET= :: vedo lista (list della viewset)
+     - =POST= :: metto in lista (create della viewset)
+**** ProductDetailView
+owner or readonly
+ - =url-utente/products/<id>=
+   - metodi ::
+     - =GET= :: vedo prodotto (retrieve della viewset)
+     - =PATCH= :: modifico prodotto (update della viewset)?
+     - =DELETE= :: elimino prodotto  (destroy della viewset)
+
+*** OrderViewset
+similmente a quanto detto per ProductViewset, il queryset su cui andranno ad agire le azioni sarà ottenuto anche con l'id dell'utente
+(potrebbe, POTREBBE venire meglio con lo username, che tanto unique not null, ma per ora facciamolo funzionare con 
+
+- order list view
+  - get :: list
+  - post :: create/add
+- order detail view
+  - get :: create
+  - put :: update <- boh
+  - patch :: partial_update
+  - delete :: destroy
+**** OrderListView
+owner or gtfo
+ - =url-utente/cart=
+   - metodi ::
+     - =GET= :: vedo tutto il carrello (list della viewset)
+     - =POST= :: aggiungo al carrello (create della viewset)
+**** OrderDetailView
+owner or gtfo
+ - =url-utente/cart/<id>=
+   - metodi ::
+     - =GET= :: vedo nel carrello (retrieve della viewset)
+     - =DELETE= :: elimino prodotto (destroy della viewset)
+     - (non ha senso mettere patch o put per il carrello, i prodotti sono readonly)
+       
