@@ -1,4 +1,3 @@
-(poi ricordati di fottere tutto il fottibile da francesco, mi raccomando)
 * Modelli
 ** Authentication
 *** ShopUser
