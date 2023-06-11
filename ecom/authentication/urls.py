@@ -18,7 +18,7 @@ urlpatterns = format_suffix_patterns([
     path('users/', shop_user_list, name='shopuser-list'),
     path('users/<int:pk>/', shop_user_detail, name='shopuser-detail'), 
 ])
-# il name=... ha un ruolo fondamentale nella ricerca dell'url che non ho ancora effettivamente capito
+#il name=... ha un ruolo fondamentale nella ricerca dell'url che non ho ancora effettivamente capito
 
 urlpatterns += [
     path('something-auth/', include('rest_framework.urls')),
