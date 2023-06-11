@@ -1,3 +1,4 @@
+(poi ricordati di fottere tutto il fottibile da francesco, mi raccomando)
 * Modelli
 ** Authentication
 *** ShopUser
@@ -85,13 +86,13 @@ similmente a quanto detto per ProductViewset, il queryset su cui andranno ad agi
   - patch :: partial_update
   - delete :: destroy
 **** OrderListView
-owner or gtfo
+visibile solo dal proprietario del carrello
  - =url-utente/cart=
    - metodi ::
      - =GET= :: vedo tutto il carrello (list della viewset)
      - =POST= :: aggiungo al carrello (create della viewset)
 **** OrderDetailView
-owner or gtfo
+visibile solo dal proprietario del carrello
  - =url-utente/cart/<id>=
    - metodi ::
      - =GET= :: vedo nel carrello (retrieve della viewset)
