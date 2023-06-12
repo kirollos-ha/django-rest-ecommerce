@@ -10,7 +10,7 @@ from .serializers import ShopUserSerializer
 
 @api_view()
 def api_root(request):
-    return Response({"dio" : "cane"})
+    return Response({"some" : "body once told me"})
 
 class ShopUserViewSet(viewsets.ModelViewSet):
     """
