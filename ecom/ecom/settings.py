@@ -10,11 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from drf_yasg import openapi
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -25,22 +25,36 @@ SECRET_KEY = 'django-insecure-lg-o+0u1aviw9it&jv7ea8*5=rjk8rkh4m$)j7&$e4s_fy+xvs
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    "render-ti-prego-fai-qualcosa.onrender.com",
+]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://render-ti-prego-fai-qualcosa.onrender.com",
+    "http://render-ti-prego-fai-qualcosa.onrender.com",
+]
 
 # Application definition
 
 INSTALLED_APPS = [
-    'rest_framework', # RICORDATELA
+    # roba mia
+    ## esterna
+    'rest_framework',
     'rest_framework_simplejwt',
+    'drf_yasg',
+    ## interna
     'authentication',
     'shop',
+    'ecom', #?
+    # roba de django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles', # questo serve per yasg
 ]
 
 MIDDLEWARE = [
@@ -132,7 +146,29 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
-    'DEFAULT_AUTHENTICATION_CLASSES' : (
+    # boh ipse dixit
+    'DEFAULT_FILTER_BACKEND' : [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES' : [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ]
+}
+
+# per far stare zitto django
+# non so cosa ho copiato
+# https://drf-yasg.readthedocs.io/en/stable/settings.html
+CAZZO_MA_VUOI_FUNZIONARE_COGLIONE = 'ecom.urls.schema_info'
+SWAGGER_SETTINGS = {
+    'DEFAULT_INFO': CAZZO_MA_VUOI_FUNZIONARE_COGLIONE,
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    },
+}
+print(SWAGGER_SETTINGS["DEFAULT_INFO"])
+
+REDOC_SETTINGS = {
+   'LAZY_RENDERING': False,
 }

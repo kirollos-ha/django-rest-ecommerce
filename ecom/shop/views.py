@@ -15,7 +15,8 @@ def save_or_bad_request(request_data):
        return Response(serializer.data, status=status.HTTP_201_CREATED)
    return Response(status = status.HTTP_400_BAD_REQUEST)
 
-from rest_framework.decorators import api_view
+
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -50,3 +51,14 @@ def user_products(request, user_id, format=None):
 def pass_ma_figo(request, user_id, product_id):
     return Response({'status' : status.HTTP_404_NOT_FOUND})
 
+from rest_framework.permissions import IsAuthenticated
+from rest_flex_fields import FlexFieldsModelViewSet 
+from authentication.serializers import ShopUserSerializer
+from authentication.models import ShopUser
+# lo usa il tutorial e mi spaventa non farlo
+# non ho idea di cosa sia, e a questo punto non credo di volerlo sapere
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def ma_vaffanculo(request, format=None):
+    return Response({ 'mannaggia' : 'la mignotta' })

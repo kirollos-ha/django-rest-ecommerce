@@ -1,0 +1,943 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Snippets API",
+        "description": "Test description",
+        "termsOfService": "https://www.google.com/policies/terms/",
+        "contact": {
+            "email": "contact@snippets.local"
+        },
+        "license": {
+            "name": "BSD License"
+        },
+        "version": "v1"
+    },
+    "basePath": "/",
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "basic": {
+            "type": "basic"
+        }
+    },
+    "security": [
+        {
+            "basic": []
+        }
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "operationId": "_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    ""
+                ]
+            },
+            "post": {
+                "operationId": "_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    ""
+                ]
+            },
+            "parameters": []
+        },
+        "/api/token/": {
+            "post": {
+                "operationId": "api_token_create",
+                "description": "Takes a set of user credentials and returns an access and refresh JSON web\ntoken pair to prove the authentication of those credentials.",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TokenObtainPair"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/TokenObtainPair"
+                        }
+                    }
+                },
+                "tags": [
+                    "api"
+                ]
+            },
+            "parameters": []
+        },
+        "/api/token/refresh/": {
+            "post": {
+                "operationId": "api_token_refresh_create",
+                "description": "Takes a refresh type JSON web token and returns an access type JSON web\ntoken if the refresh token is valid.",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TokenRefresh"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/TokenRefresh"
+                        }
+                    }
+                },
+                "tags": [
+                    "api"
+                ]
+            },
+            "parameters": []
+        },
+        "/api/token/verify/": {
+            "post": {
+                "operationId": "api_token_verify_create",
+                "description": "Takes a token and indicates if it is valid.  This view provides no\ninformation about a token's fitness for a particular use.",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TokenVerify"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/TokenVerify"
+                        }
+                    }
+                },
+                "tags": [
+                    "api"
+                ]
+            },
+            "parameters": []
+        },
+        "/authentication/": {
+            "get": {
+                "operationId": "authentication_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            },
+            "parameters": []
+        },
+        "/authentication/users/": {
+            "get": {
+                "operationId": "authentication_users_list",
+                "description": "get post et al per user",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ShopUser"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            },
+            "post": {
+                "operationId": "authentication_users_create",
+                "description": "get post et al per user",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ShopUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ShopUser"
+                        }
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            },
+            "parameters": []
+        },
+        "/authentication/users/{id}/": {
+            "get": {
+                "operationId": "authentication_users_read",
+                "description": "get post et al per user",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ShopUser"
+                        }
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            },
+            "put": {
+                "operationId": "authentication_users_update",
+                "description": "get post et al per user",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ShopUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ShopUser"
+                        }
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            },
+            "patch": {
+                "operationId": "authentication_users_partial_update",
+                "description": "get post et al per user",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ShopUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ShopUser"
+                        }
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            },
+            "delete": {
+                "operationId": "authentication_users_delete",
+                "description": "get post et al per user",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this user.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/authentication/users/{id}{format}": {
+            "get": {
+                "operationId": "authentication_users_read",
+                "description": "get post et al per user",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ShopUser"
+                        }
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            },
+            "put": {
+                "operationId": "authentication_users_update",
+                "description": "get post et al per user",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ShopUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ShopUser"
+                        }
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            },
+            "patch": {
+                "operationId": "authentication_users_partial_update",
+                "description": "get post et al per user",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ShopUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ShopUser"
+                        }
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            },
+            "delete": {
+                "operationId": "authentication_users_delete",
+                "description": "get post et al per user",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "format",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this user.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/authentication/users{format}": {
+            "get": {
+                "operationId": "authentication_list",
+                "description": "get post et al per user",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ShopUser"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            },
+            "post": {
+                "operationId": "authentication_create",
+                "description": "get post et al per user",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ShopUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ShopUser"
+                        }
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "format",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/authentication/{format}": {
+            "get": {
+                "operationId": "authentication_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "format",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/shop/": {
+            "get": {
+                "operationId": "shop_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "post": {
+                "operationId": "shop_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "parameters": []
+        },
+        "/shop/cart/": {
+            "get": {
+                "operationId": "shop_cart_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "post": {
+                "operationId": "shop_cart_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "parameters": []
+        },
+        "/shop/cart/{product_id}/": {
+            "get": {
+                "operationId": "shop_cart_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "post": {
+                "operationId": "shop_cart_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "product_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/shop/cart/{product_id}{format}": {
+            "get": {
+                "operationId": "shop_cart_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "post": {
+                "operationId": "shop_cart_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "format",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "product_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/shop/cart{format}": {
+            "get": {
+                "operationId": "shop_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "post": {
+                "operationId": "shop_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "format",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/shop/kitemmuort": {
+            "get": {
+                "operationId": "shop_kitemmuort_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "parameters": []
+        },
+        "/shop/kitemmuort{format}": {
+            "get": {
+                "operationId": "shop_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "format",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/shop/products/": {
+            "get": {
+                "operationId": "shop_products_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "post": {
+                "operationId": "shop_products_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "parameters": []
+        },
+        "/shop/products/{product_id}/": {
+            "get": {
+                "operationId": "shop_products_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "post": {
+                "operationId": "shop_products_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "product_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/shop/products/{product_id}{format}": {
+            "get": {
+                "operationId": "shop_products_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "post": {
+                "operationId": "shop_products_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "format",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "product_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/shop/products{format}": {
+            "get": {
+                "operationId": "shop_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "post": {
+                "operationId": "shop_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "format",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/shop/{format}": {
+            "get": {
+                "operationId": "shop_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "post": {
+                "operationId": "shop_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "shop"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "format",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        }
+    },
+    "definitions": {
+        "TokenObtainPair": {
+            "required": [
+                "username",
+                "password"
+            ],
+            "type": "object",
+            "properties": {
+                "username": {
+                    "title": "Username",
+                    "type": "string",
+                    "minLength": 1
+                },
+                "password": {
+                    "title": "Password",
+                    "type": "string",
+                    "minLength": 1
+                }
+            }
+        },
+        "TokenRefresh": {
+            "required": [
+                "refresh"
+            ],
+            "type": "object",
+            "properties": {
+                "refresh": {
+                    "title": "Refresh",
+                    "type": "string",
+                    "minLength": 1
+                }
+            }
+        },
+        "TokenVerify": {
+            "required": [
+                "token"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "title": "Token",
+                    "type": "string",
+                    "minLength": 1
+                }
+            }
+        },
+        "ShopUser": {
+            "required": [
+                "username",
+                "email"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "url": {
+                    "title": "Url",
+                    "type": "string",
+                    "format": "uri",
+                    "readOnly": true
+                },
+                "username": {
+                    "title": "Username",
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 1
+                },
+                "email": {
+                    "title": "Email address",
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 254,
+                    "minLength": 1
+                }
+            }
+        }
+    }
+}
